@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: clientapp1
+  cloud:
+    config:
+#      #      uri: ${CONFIG_SERVER_URI:http://localhost:8888/hie-config-server/REST/GetConfig # With Prefix (/REST/GetConfig) Added to config server
+      uri: ${CONFIG_SERVER_URI:http://localhost:8888/hie-config-server}
+      username: config-server
+      password: '{cipher}9ac2d8f0cd74784b51264d572c168035fccb01ac5a8c66594c20fbc7b5b01121'
+      label: master
+  profiles:
+    active: dev
+encrypt:
+  key: 1A4d@njds#kjre%8f4ghHF
+# This value will be replaced by ENCRYPT_KEY environment property to keep it out of plain properties file.
+# Ref: https://cloud.spring.io/spring-cloud-config/2.0.x/single/spring-cloud-config.html#_key_management
+#logging:
+#  config: ${spring.cloud.config.uri}/${spring.application.name}/${spring.profiles.active}/${spring.cloud.config.label}/log4j2.yml
+#  auth:
+#    username: ${spring.cloud.config.username}
+#    password: ${spring.cloud.config.password}
+#java:
+#  util:
+#    logging:
+#      manager: org.apache.logging.log4j.jul.LogManager

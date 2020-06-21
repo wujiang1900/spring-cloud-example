@@ -1,0 +1,76 @@
+logging:
+  level:
+    org.springframework.boot: DEBUG
+server:
+  port: 8888
+  servlet:
+    context-path: /hie-config-server
+spring:
+  security:
+    user:
+      name: config-server
+      password: '{cipher}9ac2d8f0cd74784b51264d572c168035fccb01ac5a8c66594c20fbc7b5b01121'
+    filter:
+      dispatcher-types:
+      - request
+  cloud:
+    config:
+      server:
+        accept-empty: false
+        git:
+          uri: https://github.optum.com/kvinod6/spring-cloud-config-repo
+          username: kvinod6
+          password: '{cipher}02dff0d16d09e21b4d539953fd2ea08069e7d59116dbb5c2258e88b03fb9234c'
+          basedir: file://${user.home}/spring-config-repo # default is /tmp/config-repo-<random-id> (temp dir might be deleted by maintainance teams)
+          cloneOnStart: true
+          deleteUntrackedBranches: true
+          skip-ssl-validation: true
+          timeout: 4
+          repos:
+            prod:
+              uri: https://github.optum.com/kvinod6/spring-cloud-config-repo-production
+              basedir: file://${user.home}/spring-config-repo-production
+              cloneOnStart: true
+              force-pull: true
+              deleteUntrackedBranches: true
+              pattern:
+                - '*/prod'
+            stage:
+              uri: https://github.optum.com/kvinod6/spring-cloud-config-repo-stage
+              basedir: file://${user.home}/spring-config-repo-stage
+              cloneOnStart: true
+              force-pull: true
+              deleteUntrackedBranches: true
+              pattern:
+                - '*/uat'
+                - '*/int'
+                - '*/preprod'
+                - '*/stage*'
+                - '*/test*'
+              search-paths:
+                - 'profile-props'
+                - '{application}'
+            xaas: 
+              uri: https://github.optum.com/kvinod6/spring-cloud-config-repo-xass
+              basedir: file://${user.home}/spring-config-repo-xaas
+              cloneOnStart: true
+              force-pull: true
+              deleteUntrackedBranches: true
+              pattern:
+                - '*/xaas-*'
+              search-paths:
+                - 'xaas*'
+            dev: 
+              uri: file://${user.home}/sts/spring-cloud-config-repo
+              cloneOnStart: true
+              deleteUntrackedBranches: true
+              pattern:
+                - '*/dev'
+                - '*/peer*'
+#        prefix: /REST/GetConfig # Prefix will be added after the server.servlet.ContextPath - https://cloud.spring.io/spring-cloud-config/multi/multi__embedding_the_config_server.html#_embedding_the_config_server
+# To use useDefaultLabel explained in https://cloud.spring.io/spring-cloud-config/multi/multi__serving_plain_text.html
+# Ex: http://localhost:8888/hie-config-server/REST/GetConfig/clientapp1/int/nginx.conf?useDefaultLabel=true
+  mvc:
+    pathmatch:
+      use-suffix-pattern: true
+      use-registered-suffix-pattern: false

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: optum-spring-config-server
+#  cloud:
+#    config:
+#      server:
+#        encrypt:
+#          enabled: false
+encrypt:
+  key: 1A4d@njds#kjre%8f4ghHF
+# This value will be replaced by ENCRYPT_KEY environment property to keep it out of plain properties file.
+# Ref: https://cloud.spring.io/spring-cloud-config/2.0.x/single/spring-cloud-config.html#_key_management

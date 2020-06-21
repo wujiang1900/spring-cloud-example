@@ -1,0 +1,29 @@
+server:
+  port: 9000
+  servlet:
+    context-path: /hie-customer-app
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ODX
+    platform: postgres
+    username: odx_user
+    password: odx_user
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 100
+  jpa:
+    database: POSTGRESQL
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        default_schema: odxc
+        ddl-auto: none
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        format-sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: true

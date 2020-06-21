@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: eureka
+  cloud:
+    config:
+      #      uri: ${CONFIG_SERVER_URI:http://localhost:8888/hie-config-server/REST/GetConfig # With Prefix (/REST/GetConfig) Added to config server
+      uri: ${CONFIG_SERVER_URI:http://localhost:8888/hie-config-server}
+      username: kvinod6
+      password: '{cipher}02dff0d16d09e21b4d539953fd2ea08069e7d59116dbb5c2258e88b03fb9234c'
+      label: master
+  profiles:
+    active: dev
+encrypt:
+  key: 1A4d@njds#kjre%8f4ghHF
+# This value will be replaced by ENCRYPT_KEY environment property to keep it out of plain properties file.
+# Ref: https://cloud.spring.io/spring-cloud-config/2.0.x/single/spring-cloud-config.html#_key_management
+
+# Log4j is working without secutiry enabled
+#curl -i --user kvinod6:Kvin4c5$ http://localhost:8888/hie-config-server/REST/GetConfig/eureka/dev/master/log4j2.yml
+java:
+  util:
+    logging:
+      manager: org.apache.logging.log4j.jul.LogManager
